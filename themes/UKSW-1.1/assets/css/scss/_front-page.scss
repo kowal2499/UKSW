@@ -1,0 +1,184 @@
+/* ###################################### FRONT-PAGE */
+
+section.welcome-screen {
+	position: relative;
+
+	margin-top: 15px;
+	margin-bottom: 0;
+	min-height: 300px;
+
+	#navigation-mobile {
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	.logo {
+		position: absolute;
+		top: 30px;
+		left: 0;
+		z-index: 100;
+		img {
+			display: block;
+		}
+	}
+
+	.sentence {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		z-index: 100;
+		width: 100%;
+
+		text-align: right;
+		padding: 20px;
+		padding-left: 10%;
+
+		color: #fff;
+		font-size: 18px;
+		font-weight: 200;
+		font-style: italic;
+
+		background: rgba(249, 106, 14, 0.75)
+	}
+}
+
+section article#wspolnoty2 {
+	.wspolnota {
+		margin-top: 10px;
+		position: relative;
+		min-height: 250px; 
+		background-image: url("http://www.img.erla.pl/da/podroz-do-betlejem2.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: right top;
+	  
+		.left {
+		  left: 10px;
+		}
+		
+		.right {
+		  right: 10px;
+		}
+		
+		.desc {
+		  position: absolute;
+		  bottom: 0px;
+		  display: inline-block;
+		  width: 60%;
+		  text-align: center;
+		  padding: 10px;
+		  
+		  img {
+			display: inline-block;
+			width: 80px;
+			transition: all 0.2s;
+		  }
+		  
+		  h2 {
+			margin-top: 10px;
+			font-variant: small-caps;
+			color: #004E89;
+		  }
+		  .lead {
+			color: #888;
+			font-size: 20px;
+			line-height: 25px;
+		  }
+		}
+		
+		a:hover {
+		  text-decoration: none;
+		  .h2 {
+		  }
+		  img {
+			transform: scale(1.1);
+			box-shadow: 0px 0px 5px 3px #F76A0C;
+		  }
+		}
+		&:last-child {
+			margin-bottom: 30px;
+		}
+	}
+}
+
+#main-container {
+	margin-top: 105px;
+}
+
+.admin-bar section.welcome-screen #navigation-alfa {
+	top: 32px;
+}
+
+.beta-sticked {
+	position: fixed !important;
+	bottom: auto !important;
+}
+
+@media screen and (max-width: 991px) {
+	section.welcome-screen {
+		padding-top: 15px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	#main-container {
+		margin-top: 0;
+	}
+	.secondary-nav-pattern {
+		display: none;
+	}
+	.navbar-collapse {
+		overflow-y: visible !important;
+	}
+
+	.mobile-fix {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
+	section article#wspolnoty2 {
+		.wspolnota {
+			.desc {
+				width: 100%;
+				.lead {
+					line-height: 22px;
+				}
+			}
+			.right {
+				right: 0px;
+			}
+
+			.left {
+				left: 0px;
+			}
+
+			
+		}
+
+
+	}
+}
+
+@media screen and (max-width: 600px) {
+	section.welcome-screen .logo {
+		width: 100px;
+	}
+	section.welcome-screen .sentence {
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	section.welcome-screen .sentence {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	section.welcome-screen .logo {
+		top: 25px;
+		width: 70px;
+	}
+}
+

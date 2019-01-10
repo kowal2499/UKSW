@@ -1,0 +1,24 @@
+div#outer {
+    display: inline;
+    top: 0;
+}
+
+div#cell {
+    display: inline;
+    top: 50%;
+    position: relative;
+}
+
+div#content {
+    display: inline;
+    top: -50%;
+    position: relative;
+    background-color: #EEEEEE; 
+    border: 1px solid gray; 
+    line-height: 2em;  
+    width: 40%; 
+    text-align: center;
+    font-family: Verdana, Geneva, sans-serif;
+    padding: 30px;
+    color: #444444;
+}

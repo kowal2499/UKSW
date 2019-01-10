@@ -1,0 +1,20 @@
+#da-owl {
+	a {
+		display: block;
+		width: 100%;
+		position: relative;
+		.title {
+			position: absolute;
+			bottom: 0;
+			padding: 10px;
+			background-color: rgba(249, 106, 14, 0.75);
+			color: #fff;
+			font-size: 16px;
+		}
+		&:hover {
+			.title {
+				text-decoration: underline;
+			}
+		}
+	}
+}

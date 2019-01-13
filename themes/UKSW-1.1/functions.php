@@ -263,12 +263,13 @@ function filter_content($content) {
 
     if (isset($media[1]) && !empty($media[1])) {
         foreach ($media[1] as $m) {
-            $content = preg_replace('/(<img .*wp-image-' . $m . '.*>)/', '<a href="' . wp_get_attachment_image_src($m, 'full')[0] . '">\1</a>', $content);
+            $content = preg_replace('/(<img .*wp-image-' . $m . '.*>)/', '<a href="' . wp_get_attachment_image_src($m, 'full')[0] . '" class="js-lightbox">\1</a>', $content);
         }
     }
 
     /* breadcrumbs on the bottom of the content */
-    $breadcrumbs = '<ol class="breadcrumb">' . '<li><a href="' . get_home_url() .'"><i class="fa fa-home"></i> Strona główna</a></li>';
+    $breadcrumbs = '<ol class="breadcrumb">';
+    $breadcrumbs .= '<li><a href="' . get_home_url() .'"><i class="fa fa-home"></i> Strona główna</a></li>';
     $breadcrumbs .= '<li class="active">' . '<a href="' . get_permalink() .'">'. get_the_title() . '</a></li>';
     $breadcrumbs .= '</ol>';
 

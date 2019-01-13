@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap3": "^3.3.5",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "simplelightbox": "^1.15.1"
   },
   "devDependencies": {
     "gulp": "^4.0.0",

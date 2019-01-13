@@ -1,3 +1,3 @@
 jQuery(document).ready(function() {
-	jQuery('.simple-lightbox a').simpleLightbox()
+	jQuery('.post-content a').simpleLightbox()
 });

@@ -43,6 +43,92 @@ section.welcome-screen {
 	}
 }
 
+section.tabbed-content {
+	margin-top: 20px;
+
+	ul.nav.nav-pills {
+		background-color: $cBegeBackground;
+
+		border-bottom: 1px solid $cOrange;
+		margin-left: 0;
+
+		li a {
+			font-size: 1.9em;
+			letter-spacing: 0.2em;
+			font-variant: small-caps;
+			font-weight: 400;
+
+			padding-top: 2px;
+			padding-bottom: 2px;
+			border-bottom: 3px solid transparent;
+			border-radius: 0;
+
+			color: $cOrange;
+
+			transition: all 0.2s;
+
+			&:hover,
+			&:focus {
+				background-color: $cBegeBackground;
+			}
+		}
+
+		li.active a {
+			background-color: $cBegeBackground2;
+			border-bottom: 3px solid $cOrange;
+		}
+	}
+
+	.tab-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+
+		width: 100%;
+		height: 180px;
+
+		.tile {
+			position: relative;
+			margin: 20px;
+			width: 25%;
+			box-sizing: border-box;
+			overflow: hidden;
+
+			a {
+				img {
+					display: block;
+					width: 100%;
+					transition: all 0.2s;
+				}
+
+				.title {
+					position: absolute;
+					bottom: 0;
+					right: 0;
+					width: 60%;
+					background-color: $cOrange;
+					color: $cContentBackground;
+					text-align: right;
+					padding: 10px;
+					padding-right: 30px;
+					margin-bottom: 30px;
+
+					font-size: 1.0em;
+					letter-spacing: 0.2em;
+					font-variant: small-caps;
+
+					opacity: 0.8;
+
+				}
+
+				&:hover img {
+					transform: scale(1.1);
+				}
+			}
+		}
+	}
+}
+
 section article#wspolnoty2 {
 	.wspolnota {
 		margin-top: 10px;

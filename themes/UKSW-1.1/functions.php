@@ -104,8 +104,11 @@ add_action( 'widgets_init', 'uksw_szablon_widgets_init' );
  */
 function uksw_szablon_scripts() {
 	wp_enqueue_style( 'uksw-szablon-style', get_stylesheet_uri() );
-	wp_enqueue_style( 'mystyle', get_template_directory_uri() . '/assets/css/mystyle.css', $ver = '1.2' );
+
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/node_modules/bootstrap3/dist/css/bootstrap.min.css' );
+    wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/node_modules/font-awesome/css/font-awesome.min.css' );
+
+    wp_enqueue_style( 'mystyle', get_template_directory_uri() . '/assets/build/css/mystyle.css', $ver = '1.2' );
 
 	wp_enqueue_script( 'uksw-szablon-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
@@ -117,6 +120,12 @@ function uksw_szablon_scripts() {
 
 	wp_enqueue_script( 'rkmain', get_template_directory_uri() . '/assets/js/main.js');
 
+
+//	if (is_single()) {
+        wp_enqueue_style( 'simplelightbox', get_template_directory_uri() . '/node_modules/simplelightbox/dist/simplelightbox.min.css' );
+        wp_enqueue_script( 'simplelightbox', get_template_directory_uri() . '/node_modules/simplelightbox/dist/simple-lightbox.min.js', array('jquery') );
+//    }
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -124,6 +133,12 @@ function uksw_szablon_scripts() {
 
 }
 add_action( 'wp_enqueue_scripts', 'uksw_szablon_scripts' );
+
+
+require_once get_template_directory() . '/classes/custompost.php';
+require_once get_template_directory() . '/classes/activity.php';
+
+$custom = cpt\Activity::getInstance();
 
 /**
  * Implement the Custom Header feature.
@@ -239,18 +254,24 @@ if (is_admin()) {
 	add_action('pre_get_posts', 'wydarzenia_order');
 }
 
-// add_action('manage_wydarzenia_posts_columns', 'manage_wydarzenia_posts_columns');
+function filter_content($content) {
 
-// function manage_wydarzenia_posts_columns($post_columns) {
-//     $post_columns = array(
-//     	'cb' => $post_columns['cb'],
-//     	'start' => 'start',
-//     	'koniec' => 'koniec',
-//     	'thumbnail'	=>	'Thumbnail',
-// 		'title' 	=> 'Title',
-// 		'featured' 	=> 'Featured',
-// 		'author'	=>	'Author',
-// 		'date'		=>	'Date',
-//         );
-//     return $post_columns;
-// }
+    /* for every image inside the content add link to full size image */
+
+    $media = [];
+    preg_match_all('/wp-image-(\d+)/', $content, $media);
+
+    if (isset($media[1]) && !empty($media[1])) {
+        foreach ($media[1] as $m) {
+            $content = preg_replace('/(<img .*wp-image-' . $m . '.*>)/', '<a href="' . wp_get_attachment_image_src($m, 'full')[0] . '">\1</a>', $content);
+        }
+    }
+
+    /* breadcrumbs on the bottom of the content */
+    $breadcrumbs = '<ol class="breadcrumb">' . '<li><a href="' . get_home_url() .'"><i class="fa fa-home"></i> Strona główna</a></li>';
+    $breadcrumbs .= '<li class="active">' . '<a href="' . get_permalink() .'">'. get_the_title() . '</a></li>';
+    $breadcrumbs .= '</ol>';
+
+    return $content . $breadcrumbs;
+}
+add_filter('the_content', 'filter_content');

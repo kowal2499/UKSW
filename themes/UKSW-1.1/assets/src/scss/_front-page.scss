@@ -43,16 +43,23 @@ section.welcome-screen {
 	}
 }
 
-section.tabbed-content {
+section.row-content {
 	margin-top: 20px;
 
-	ul.nav.nav-pills {
+	ul.nav.nav-pills,
+	ul {
 		background-color: $cBegeBackground;
 
 		border-bottom: 1px solid $cOrange;
 		margin-left: 0;
+		padding-left: 0;
 
-		li a {
+		li {
+			list-style-type: none;
+		}
+		li a,
+		li h2
+		{
 			font-size: 1.9em;
 			letter-spacing: 0.2em;
 			font-variant: small-caps;
@@ -73,7 +80,18 @@ section.tabbed-content {
 			}
 		}
 
-		li.active a {
+		li h2 {
+			margin: 0;
+			width: 33%;
+			text-align: center;
+			color: $cBlue;
+			padding: 6px 15px;
+			border-bottom: 3px solid $cOrange;
+			background-color: $cBegeBackground2;
+		}
+
+		li.active a
+		{
 			background-color: $cBegeBackground2;
 			border-bottom: 3px solid $cOrange;
 		}
@@ -123,6 +141,65 @@ section.tabbed-content {
 
 				&:hover img {
 					transform: scale(1.1);
+				}
+			}
+		}
+	}
+
+	.news-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+
+		width: 100%;
+		height: 180px;
+
+		.news-item {
+
+			margin: 20px;
+			width: 25%;
+			height: 150px;
+			box-sizing: border-box;
+			overflow: hidden;
+
+			a {
+				position: relative;
+				display: block;
+
+				background-image: url("../../imgs/admin-ajax.jpg");
+				background-size: cover;
+				background-position: center center;
+
+
+				width: 100%;
+				height: 100%;
+
+				.title, .date {
+					position: absolute;
+					width: 100%;
+					bottom: 0;
+					padding: 10px 5px;
+
+					text-align: left;
+					font-size: 1.0em;
+					line-height: 1.1em;
+					letter-spacing: 0.2em;
+					font-weight: 600;
+
+					color: $cBlue;
+					background-color: #fff;
+					opacity: 0.75;
+					font-variant: small-caps;
+				}
+
+				.date {
+					position: relative;;
+					padding: 2px;
+					margin-bottom: 5px;
+
+					color: $cRed;
+					font-size: 0.8em;
+					letter-spacing: normal;
 				}
 			}
 		}

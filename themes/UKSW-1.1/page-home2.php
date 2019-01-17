@@ -54,17 +54,61 @@ get_header();
 
         <div class="row backstage-pattern">
             <div class="col-md-12">
+                <section class="row-content">
+                    <ul>
+                        <li><h2>Wiadomości</h2></li>
+                    </ul>
 
-                <section class="tabbed-content">
+                    <div class="news-container">
+
+                        <div class="news-item">
+                            <a href="">
+                                <div class="title">
+                                    <div class="date">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-15
+                                    </div>
+                                        Opłatek u J.E. ks. kard. Kazimierza Nycza
+                                </div>
+                            </a>
+                        </div>
+
+
+                        <div class="news-item">
+                            <a href="">
+                                <div class="title">
+                                    <div class="date">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-15
+                                    </div>
+                                    Gramy z WOŚP :)
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="news-item">
+                            News 3
+                        </div>
+
+                        <div class="news-item">
+                            News 4
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+
+        <div class="row backstage-pattern">
+            <div class="col-md-12">
+
+                <section class="row-content">
                     <ul class="nav nav-pills nav-justified">
-
                         <?php
                             foreach (activityCategories as $id => $activity) {
                                 echo '<li' . ($id === 0 ? ' class="active"' : ''). '><a data-toggle="tab" href="#' . $activity['href'] .'" style="color: '. $activity['color'] . '">'. $activity['name'] . '</a></li>';
                             }
                         ?>
-
                     </ul>
+
 
                     <div class="tab-content">
 

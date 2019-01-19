@@ -115,10 +115,24 @@ function uksw_szablon_scripts() {
 	wp_enqueue_script( 'uksw-szablon-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/node_modules/bootstrap3/dist/js/bootstrap.min.js', array ( 'jquery' ) );
+	wp_enqueue_script( 'underscore', get_template_directory_uri() . '/node_modules/underscore/underscore-min.js');
 	 // wp_enqueue_script( 'responsive-menu.js', get_template_directory_uri() . '/assets/js/responsive-menu.js', array ( 'jquery' ) );
 	wp_enqueue_script( 'rkfacebook', get_template_directory_uri() . '/assets/js/facebook.js');
 
 	wp_enqueue_script( 'rkmain', get_template_directory_uri() . '/assets/js/main.js');
+
+
+    // set variables for script
+    wp_localize_script(
+        'rkmain',
+        '_settings',
+        [
+            'url' => admin_url('admin-ajax.php'),
+            'news_navigation' => [
+                'items_per_page' => 4
+            ]
+        ]
+    );
 
 
 //	if (is_single()) {
@@ -133,6 +147,68 @@ function uksw_szablon_scripts() {
 
 }
 add_action( 'wp_enqueue_scripts', 'uksw_szablon_scripts' );
+
+function news_navigation() {
+
+    $itemsPerPage = 4;
+
+    $data = $_POST;
+    $page = filter_var($_POST['page'], FILTER_VALIDATE_INT);
+    $totalPages = 0;
+
+    if ($c = wp_count_posts('post')->publish) {
+        $totalPages = ceil($c/4);
+    }
+
+    if ($page < 1 || $page > $totalPages) {
+        wp_send_json_error('wrong page number');
+    }
+
+    $news_query = new WP_Query([
+        'post_type' => 'post',
+        'posts_per_page' => $itemsPerPage,
+        'paged' => $page,
+        'orderby' => 'date',
+        'order' => 'DESC'
+    ]);
+
+    $news = [];
+
+    while($news_query->have_posts()) {
+        $news_query->the_post();
+
+        if ($img = get_the_post_thumbnail_url()) {
+            $image = 'background-image: url(\'' . $img . '\')';
+        } else {
+            $image = '';
+        }
+
+        $news[] = [
+            'title' => get_the_title(),
+            'link' => get_permalink(),
+            'image' => $image,
+            'date' => get_the_date()
+        ];
+    }
+
+    $next = 0;
+    if ($page < $totalPages) {
+        $next = $page + 1;
+    }
+    $prev = 0;
+    if ($page > 1) {
+        $prev = $page - 1;
+    }
+
+    wp_send_json_success(
+        [
+            'news' => $news,
+            'next' => $next,
+            'prev' => $prev
+        ]
+    );
+}
+add_action('wp_ajax_uksw_news_navigation', 'news_navigation');
 
 
 require_once get_template_directory() . '/classes/custompost.php';

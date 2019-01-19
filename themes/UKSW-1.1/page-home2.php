@@ -33,7 +33,39 @@ if (count((array)$sentences) > 1) {
 
 require_once get_template_directory() . '/classes/custompost.php';
 require_once get_template_directory() . '/classes/activity.php';
+
+/**
+ * Zbieranie aktywności
+ */
 $activities = cpt\Activity::getInstance()->findAll();
+
+/**
+ * Zbieranie newsów
+ */
+$news = [];
+
+$news_query = new WP_Query([
+        'post_type' => 'post',
+        'posts_per_page' => 4,
+        'paged' => 1,
+        'orderby' => 'date',
+        'order' => 'DESC'
+]);
+while($news_query->have_posts()) {
+    $news_query->the_post();
+
+    $news[] = [
+        'title' => get_the_title(),
+        'link' => get_permalink(),
+        'image' => get_the_post_thumbnail_url(),
+        'date' => get_the_date()
+    ];
+}
+$news_pagination = 1;
+
+if ($newsCount = wp_count_posts('post')->publish) {
+    $news_pagination = ceil($newsCount/4);
+}
 
 get_header();
 
@@ -52,50 +84,53 @@ get_header();
             </div>
         </div><!-- row -->
 
-        <div class="row backstage-pattern">
-            <div class="col-md-12">
-                <section class="row-content">
-                    <ul>
-                        <li><h2>Wiadomości</h2></li>
-                    </ul>
+        <?php if ($newsCount): ?>
+            <div class="row backstage-pattern">
+                <div class="col-md-12">
+                    <section class="row-content" id="news-section">
 
-                    <div class="news-container">
+                        <div class="section-title">
+                            <h2>Wiadomości</h2>
+                        </div>
 
-                        <div class="news-item">
-                            <a href="">
-                                <div class="title">
-                                    <div class="date">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-15
+                        <div class="wrapper">
+
+                            <div class="news-container"></div>
+
+                            <div class="loading" style="display: none">
+                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                <span class="sr-only">Loading...</span>
+                            </div>
+
+                        </div>
+
+                        <nav class="news-navigation">
+                            <?php wp_nonce_field('uksw_news_navigation'); ?>
+                            <ul class="pager">
+                                <li class="previous <?php echo 'hidden'; ?>" data-goto="1"><a href="#" class="btn btn-default"><span aria-hidden="true">&larr;</span> Późniejsze</a></li>
+                                <li class="next <?php echo $news_pagination > 1 ? '' : 'hidden'; ?>" data-goto=2><a href="#" class="btn btn-default">Wcześniejsze <span aria-hidden="true">&rarr;</span></a></li>
+                            </ul>
+                        </nav>
+
+                        <script type="text/template" id="js-news-navigation-template">
+                            <div class="news-item">
+                                <a href="<%= link %>" style="<%= image %>">
+                                    <div class="blend">
+                                        <div class="date">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i> <%= date %>
+                                        </div>
+                                        <div class="title">
+                                            <h3><%= title %></h3>
+                                        </div>
                                     </div>
-                                        Opłatek u J.E. ks. kard. Kazimierza Nycza
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
+                        </script>
 
-
-                        <div class="news-item">
-                            <a href="">
-                                <div class="title">
-                                    <div class="date">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-15
-                                    </div>
-                                    Gramy z WOŚP :)
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="news-item">
-                            News 3
-                        </div>
-
-                        <div class="news-item">
-                            News 4
-                        </div>
-                    </div>
-
-                </section>
+                    </section>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
 
         <div class="row backstage-pattern">
             <div class="col-md-12">

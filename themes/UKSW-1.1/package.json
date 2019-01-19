@@ -11,7 +11,8 @@
   "dependencies": {
     "bootstrap3": "^3.3.5",
     "font-awesome": "^4.7.0",
-    "simplelightbox": "^1.15.1"
+    "simplelightbox": "^1.15.1",
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
     "gulp": "^4.0.0",

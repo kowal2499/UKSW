@@ -42,25 +42,6 @@ $activities = cpt\Activity::getInstance()->findAll();
 /**
  * Zbieranie newsów
  */
-$news = [];
-
-$news_query = new WP_Query([
-        'post_type' => 'post',
-        'posts_per_page' => 4,
-        'paged' => 1,
-        'orderby' => 'date',
-        'order' => 'DESC'
-]);
-while($news_query->have_posts()) {
-    $news_query->the_post();
-
-    $news[] = [
-        'title' => get_the_title(),
-        'link' => get_permalink(),
-        'image' => get_the_post_thumbnail_url(),
-        'date' => get_the_date()
-    ];
-}
 $news_pagination = 1;
 
 if ($newsCount = wp_count_posts('post')->publish) {

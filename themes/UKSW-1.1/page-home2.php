@@ -71,7 +71,7 @@ get_header();
                     <section class="row-content" id="news-section">
 
                         <div class="section-title">
-                            <h2>Wiadomości</h2>
+                            <h2>Aktualności</h2>
                         </div>
 
                         <div class="wrapper">
@@ -88,14 +88,14 @@ get_header();
                         <nav class="news-navigation">
                             <?php wp_nonce_field('uksw_news_navigation'); ?>
                             <ul class="pager">
-                                <li class="previous <?php echo 'hidden'; ?>" data-goto="1"><a href="#" class="btn btn-default"><span aria-hidden="true">&larr;</span> Późniejsze</a></li>
-                                <li class="next <?php echo $news_pagination > 1 ? '' : 'hidden'; ?>" data-goto=2><a href="#" class="btn btn-default">Wcześniejsze <span aria-hidden="true">&rarr;</span></a></li>
+                                <li class="previous <?php echo 'hidden'; ?>" data-goto="1"><a href="#" class="btn btn-default"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></li>
+                                <li class="next <?php echo $news_pagination > 1 ? '' : 'hidden'; ?>" data-goto=2><a href="#" class="btn btn-default"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></li>
                             </ul>
                         </nav>
 
                         <script type="text/template" id="js-news-navigation-template">
                             <div class="news-item">
-                                <a href="<%= link %>" style="<%= image %>">
+                                <a href="<%= link %>" style="<%= image_css %>">
                                     <div class="blend">
                                         <div class="date">
                                             <i class="fa fa-calendar" aria-hidden="true"></i> <%= date %>

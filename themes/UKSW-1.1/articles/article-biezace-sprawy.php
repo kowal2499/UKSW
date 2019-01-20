@@ -1,45 +1,62 @@
 <?php
 
-	$query_args = array (
-		'post_type' => 'post',
-		'posts_per_page' => -1,
-		'orderby'	=>	'date',
-		'order'	=>	'DESC'
-	);
+    /**
+     * Zbieranie newsów
+     */
+    $news_pagination = 1;
 
-	$loop = new WP_Query ( $query_args );
-
-	if ( $loop->have_posts() ) :
-?> 
-		<article id="current-issues">
-		<h1>Aktualności</h1>
-		<ul> 
-
-<?php
-		while ( $loop->have_posts() ): $loop->the_post();
+    if ($newsCount = wp_count_posts('post')->publish) {
+        $news_pagination = ceil($newsCount/4);
+    }
 
 ?>
 
-			<li>
-				<a href='<?php the_permalink(); ?>'>
-					<?php the_post_thumbnail('thumbnail'); ?>
-					<span class="issue-title"><?php the_title(); ?></span>
-					
-				</a>
+<?php if ($newsCount): ?>
 
-			</li>
-<?php
-	
-		endwhile;
-?> </ul> <?php
-	// else:
-		// echo "brak postów";
-	
-	endif;
+<article id="current-issues">
 
-	
+    <h1>Aktualności</h1>
 
+    <div class="wrapper">
+        <div class="news-container">
+        </div>
+        <div class="loading" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 
-?>
+    <nav class="news-navigation">
+        <?php wp_nonce_field('uksw_news_navigation'); ?>
+        <ul class="pager">
+            <li class="previous <?php echo 'hidden'; ?>" data-goto="1"><a href="#" class="btn btn-default"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></li>
+            <li class="next <?php echo $news_pagination > 1 ? '' : 'hidden'; ?>" data-goto=2><a href="#" class="btn btn-default"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></li>
+        </ul>
+    </nav>
+
+    <script type="text/template" id="js-news-navigation-template">
+
+        <a href="<%= link %>">
+            <div class="news-item">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img class="img-responsive" src="<%= image_thumb %>" alt="">
+                    </div>
+                    <div class="col-sm-6">
+
+                        <h3><%= title %></h3>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="date"><%= date %></div>
+                    </div>
+
+                </div>
+            </div>
+        </a>
+
+    </script>
 
 </article>
+
+<?php endif;?>

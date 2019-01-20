@@ -87,6 +87,7 @@ jQuery(document).ready(function() {
 
 	};
 
-	nav = new NewsNavigation('section#news-section');
+	newsHomePage = new NewsNavigation('section#news-section');
+	newsSidebar = new NewsNavigation('article#current-issues');
 
 });

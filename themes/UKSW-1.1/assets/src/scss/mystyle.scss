@@ -22,6 +22,7 @@ $cText: #555;
 @import "navbar";
 @import "front-page";
 @import "widgets";
+@import "news";
 @import "current-issues";
 
 html, body {
@@ -252,8 +253,8 @@ a:visited.btn.btn-book {
 	font-size: 1.6em;
 	color: #efefd0;
 	background-color: #004e89;
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-top: 0;
+	margin-bottom: 10px;
 }
 
 .widget-area img {
@@ -396,32 +397,6 @@ article#last-comments ul {
 	padding-left: 20px;
 	list-style-type: none;
 }
-
-/* ############################################## WIDGET AREA: CURRENT-ISSUES */
-
-article#current-issues ul {
-	margin-left: 0;
-	padding-left: 20px;
-	list-style-type: none;
-}
-
-article#current-issues li {
-	font-size: 1.1em;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #F96A0E;
-}
-
-article#current-issues img {
-	display: block;
-	margin: 0 auto;
-	padding: 10px;
-}
-
-article#current-issues a:hover {
-	text-decoration: underline !important;
-}
-
 
 #secondary  {
 	margin: auto 30px

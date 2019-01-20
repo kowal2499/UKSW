@@ -7,6 +7,8 @@
  * @package UKSW-szablon
  */
 
+require_once 'classes/helpers.php';
+
 if ( ! function_exists( 'uksw_szablon_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -179,14 +181,19 @@ function news_navigation() {
 
         if ($img = get_the_post_thumbnail_url()) {
             $image = 'background-image: url(\'' . $img . '\')';
+            $img_small = get_the_post_thumbnail_url(null, 'thumbnail');
+            $img_full = get_the_post_thumbnail_url(null, 'full');
         } else {
             $image = '';
+            $img_small = $img_full = getDummyPictureUrl();
         }
 
         $news[] = [
             'title' => get_the_title(),
             'link' => get_permalink(),
-            'image' => $image,
+            'image_css' => $image,
+            'image_thumb' => $img_small,
+            'image_full' => $img_full,
             'date' => get_the_date()
         ];
     }

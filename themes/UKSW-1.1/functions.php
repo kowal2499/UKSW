@@ -210,6 +210,10 @@ function news_navigation() {
 }
 add_action('wp_ajax_uksw_news_navigation', 'news_navigation');
 
+if(isset($_REQUEST['action']) && $_REQUEST['action']=='uksw_news_navigation'):
+    add_action('wp_ajax_uksw_news_navigation', 'news_navigation');
+    add_action('wp_ajax_nopriv_uksw_news_navigation', 'news_navigation');
+endif;
 
 require_once get_template_directory() . '/classes/custompost.php';
 require_once get_template_directory() . '/classes/activity.php';
@@ -334,14 +338,14 @@ function filter_content($content) {
 
     /* for every image inside the content add link to full size image */
 
-    $media = [];
-    preg_match_all('/wp-image-(\d+)/', $content, $media);
-
-    if (isset($media[1]) && !empty($media[1])) {
-        foreach ($media[1] as $m) {
-            $content = preg_replace('/(<img .*wp-image-' . $m . '.*>)/', '<a href="' . wp_get_attachment_image_src($m, 'full')[0] . '" class="js-lightbox">\1</a>', $content);
-        }
-    }
+//    $media = [];
+//    preg_match_all('/wp-image-(\d+)/', $content, $media);
+//
+//    if (isset($media[1]) && !empty($media[1])) {
+//        foreach ($media[1] as $m) {
+//            $content = preg_replace('/(<img .*wp-image-' . $m . '.*>)/', '<a href="' . wp_get_attachment_image_src($m, 'full')[0] . '" class="js-lightbox">\1</a>', $content);
+//        }
+//    }
 
     /* breadcrumbs on the bottom of the content */
     $breadcrumbs = '<ol class="breadcrumb">';

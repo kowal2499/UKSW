@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
 
-	jQuery('.post-content a.js-lightbox').simpleLightbox();
+	jQuery('a.js-lightbox').simpleLightbox();
 
 	var NewsNavigation = function(el) {
 		this.$el = jQuery(document).find(el);

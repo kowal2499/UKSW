@@ -52,9 +52,9 @@ ul.nav.navbar-nav.navbar-right {
 #navigation-alfa {
 	position: fixed;
 	left: 0;
-  right: 0;
-  width: 100%;
-  z-index: 200;
+	right: 0;
+	width: 100%;
+	z-index: 200;
 
 	background-color: rgb(255, 255, 255);
 	
@@ -90,51 +90,6 @@ ul.nav.navbar-nav.navbar-right {
 		
 	}
 
-}
-
-
-#navigation-beta {
-		width: 100%;
-		bottom: 0;
-		margin-bottom: 15px;
-		z-index: 100;
-		
-		transition: all 0.4s ease;
-
-		li a {
-			line-height: 40px;
-			color: #eee !important;
-		}
-
-		.navbar-nav>li>a:hover {
-			border-bottom: 5px solid #f76a0c;
-			color: #333 !important;
-			background-color: #fafafa;
-		}
-
-		&.navbar.navbar-default {
-			margin-bottom: 0;
-			background-color: rgba(0, 78, 137, 0.9) !important;
-		}
-
-		ul.nav.navbar-nav.navbar-right {
-				margin-right: 15px;
-			}
-
-		&.affix {
-			position: fixed;
-			top: 50px;
-			left: 0;
-  		right: 0;
-
-  		width: 100%;
-  		height: 50px;
-  		z-index: 200;
-
-  		ul.nav.navbar-nav.navbar-right {
-				margin-right: 0;
-			}
-		}
 }
 
 #navigation-mobile {
@@ -179,8 +134,16 @@ ul.nav.navbar-nav.navbar-right {
 }
 
 @media screen and (max-width: 1199px) {
+	#navigation-alfa {
+		height: 60px;
+
+		li a {
+			line-height: 55px !important;
+		}
+	}
+
+
 	#navigation-alfa img {
-		margin-top: 15px;
 		height: 60px;
 	}
 	#navigation-alfa.affix img {
@@ -193,8 +156,7 @@ ul.nav.navbar-nav.navbar-right {
 }
 
 @media screen and (max-width: 991px) {
-	#navigation-alfa li a,
-	#navigation-beta li a {
+	#navigation-alfa li a {
 		font-size: 0.95em;
 	}
 	#navigation-alfa.sticky-nav li a,

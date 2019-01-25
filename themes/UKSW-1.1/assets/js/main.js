@@ -1,6 +1,27 @@
 jQuery(document).ready(function() {
 
+	/**
+	 * Lightbox
+	 */
+
 	jQuery('a.js-lightbox').simpleLightbox();
+
+	/**
+	 * Slider na stronie głównej
+	 */
+	jQuery('#owl-simple').owlCarousel(
+		{
+			items: 1,
+			autoplay: true,
+			autoplayTimeout: 4500,
+			autoplayHoverPause: false,
+			loop: true,
+			animateOut: 'fadeOut'
+		});
+
+	/**
+	 * Ajaxowy lazy load wiadomości
+	 */
 
 	var NewsNavigation = function(el) {
 		this.$el = jQuery(document).find(el);

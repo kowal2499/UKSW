@@ -28,7 +28,11 @@ $sentences = include_once 'classes/sentences.php';
 
 // losowanie cytatu z PŚ
 if (count((array)$sentences) > 1) {
+    do {
     $sentence = $sentences[rand(0, count((array)$sentences)-1)];
+    $words = count(preg_split('/\s+/', $sentence));
+    } while ($words > 33);
+
 }
 
 require_once get_template_directory() . '/classes/custompost.php';
@@ -52,17 +56,30 @@ get_header();
 
 ?>
         <div class="row backstage-pattern">
-            <div class="col-md-6">
-                <section class="welcome-screen">
-                    <?php do_shortcode('[eoc-simple]'); ?>
-                    <div class="logo"><img src="<?php echo get_template_directory_uri() . '/assets/imgs/jmn.jpg'; ?>" alt=""></div>
-                    <?php if ($sentence): ?>
-                        <div class="sentence">
-                            <?php echo $sentence; ?>
+            <div class="col-md-12">
+                <div class="welcome-screen">
+
+                    <div class="section-slider">
+                        <?php include_once 'classes/slider.php'; ?>
+                        <div class="layer-logo">
+                            <img src="<?php echo get_template_directory_uri() . '/assets/imgs/jmn.jpg'; ?>" alt="">
                         </div>
-                    <?php endif; ?>
-                </section>
+
+                        <div class="layer-sentence">
+                            <img class="" src="<?php echo get_template_directory_uri() . '/assets/imgs/da_circle_transparent.png'; ?>" alt="">
+
+                            <?php if ($sentence): ?>
+                                <div class="sentence">
+                                    <?php echo $sentence; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
+
         </div><!-- row -->
 
         <?php if ($newsCount): ?>

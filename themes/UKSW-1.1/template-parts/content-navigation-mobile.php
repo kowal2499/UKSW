@@ -19,7 +19,7 @@
       <ul class="nav navbar-nav navbar-left">
 
       <?php 
-      	$my_menus = Array ('primary', 'secondary');
+      	$my_menus = Array ('primary');
       	$menu_list = '';
 
       	foreach ( $my_menus as $menu_name) {
@@ -31,6 +31,11 @@
 			    foreach ( (array) $menu_items as $key => $menu_item ) {
 			        $title = $menu_item->title;
 			        $url = $menu_item->url;
+
+			        if (is_front_page() && $key == 0) {
+//			            $class = ''
+                    }
+
 			        $menu_list .= '<li class="mobile-menu-'.$menu_name.'"><a href="' . $url . '">' . $title . '</a></li>';
 			    } 
 			} 

@@ -45,8 +45,3 @@
 
 		<div class="container" id="main-container">
 			
-			<div class="row margin-fix">
-				<div class="col-md-12 secondary-nav-pattern">
-					<?php include "template-parts/content-navigation-secondary.php"; ?>
-				</div>
-			</div>

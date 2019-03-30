@@ -74,7 +74,9 @@ article#current-issues {
   }
 }
 
-section#news-section {
+section#news-section,
+section.row-content {
+
   .wrapper {
 
     min-height: 180px;
@@ -158,6 +160,38 @@ section#news-section {
           border-bottom: 5px solid $cOrange;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 1199px) {
+    .wrapper .news-container {
+      justify-content: center;
+
+      .news-item {
+        width: 192px;
+        height: 120px;
+
+        a {
+          .date {
+            padding: 5px;
+            font-size: 0.6em;
+          }
+
+          h3 {
+            font-size: 0.85em;
+          }
+
+        }
+      }
+
+    }
+  }
+}
+
+section.row-content {
+  .wrapper {
+    .news-container {
+      justify-content: center;
     }
   }
 }

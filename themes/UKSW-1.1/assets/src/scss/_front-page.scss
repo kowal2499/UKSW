@@ -4,15 +4,22 @@
 	position: relative;
 	box-sizing: border-box;
 
-
 	margin-top: 15px;
 	margin-bottom: 0;
-	min-height: 300px;
+
+	.mobile-only {
+		img {
+			max-width: 200px;
+		}
+		display: none;
+		margin-bottom: 10px;
+	}
 
 	.section-slider {
 
 		display: inline-block;
 		width: 100%;
+		position: relative;
 
 		#navigation-mobile {
 			position: absolute;
@@ -131,55 +138,6 @@ section.row-content {
 		}
 	}
 
-	.tab-container {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-evenly;
-		flex-wrap: nowrap;
-
-		width: 100%;
-		height: 180px;
-
-		.tile {
-			position: relative;
-			margin: 20px;
-			width: 25%;
-			box-sizing: border-box;
-			overflow: hidden;
-
-			a {
-				img {
-					display: block;
-					width: 100%;
-					transition: all 0.2s;
-				}
-
-				.title {
-					position: absolute;
-					bottom: 0;
-					right: 0;
-					width: 60%;
-					background-color: $cOrange;
-					color: $cContentBackground;
-					text-align: right;
-					padding: 10px;
-					padding-right: 30px;
-					margin-bottom: 30px;
-
-					font-size: 1.0em;
-					letter-spacing: 0.2em;
-					font-variant: small-caps;
-
-					opacity: 0.8;
-
-				}
-
-				&:hover img {
-					transform: scale(1.1);
-				}
-			}
-		}
-	}
 }
 
 nav.news-navigation {
@@ -202,65 +160,6 @@ nav.news-navigation {
 	}
 }
 
-section article#wspolnoty2 {
-	.wspolnota {
-		margin-top: 10px;
-		position: relative;
-		min-height: 250px; 
-		background-image: url("http://www.img.erla.pl/da/podroz-do-betlejem2.jpg");
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: right top;
-	  
-		.left {
-		  left: 10px;
-		}
-		
-		.right {
-		  right: 10px;
-		}
-		
-		.desc {
-		  position: absolute;
-		  bottom: 0px;
-		  display: inline-block;
-		  width: 60%;
-		  text-align: center;
-		  padding: 10px;
-		  
-		  img {
-			display: inline-block;
-			width: 80px;
-			transition: all 0.2s;
-		  }
-		  
-		  h2 {
-			margin-top: 10px;
-			font-variant: small-caps;
-			color: #004E89;
-		  }
-		  .lead {
-			color: #888;
-			font-size: 20px;
-			line-height: 25px;
-		  }
-		}
-		
-		a:hover {
-		  text-decoration: none;
-		  .h2 {
-		  }
-		  img {
-			transform: scale(1.1);
-			box-shadow: 0px 0px 5px 3px #F76A0C;
-		  }
-		}
-		&:last-child {
-			margin-bottom: 30px;
-		}
-	}
-}
-
 #main-container {
 	margin-top: 105px;
 }
@@ -277,6 +176,23 @@ section article#wspolnoty2 {
 @media screen and (max-width: 1199px) {
 	#main-container {
 		margin-top: 75px;
+
+		.section-slider {
+			.layer-sentence {
+				width: 200px;
+				height: 300px;
+
+				img {
+					width: 45%;
+				}
+				.sentence {
+					font-size: 0.95em;
+				}
+			}
+			.uksw-slide {
+				height: 300px;
+			}
+		}
 	}
 }
 
@@ -289,10 +205,18 @@ section article#wspolnoty2 {
 @media screen and (max-width: 767px) {
 	#main-container {
 		margin-top: 0;
+
+		.section-slider {
+			.layer-sentence {
+				right: 0;
+			}
+
+			.layer-logo {
+				width: 110px;
+			}
+		}
 	}
-	.secondary-nav-pattern {
-		display: none;
-	}
+
 	.navbar-collapse {
 		overflow-y: visible !important;
 	}
@@ -300,28 +224,6 @@ section article#wspolnoty2 {
 	.mobile-fix {
 		padding-left: 0 !important;
 		padding-right: 0 !important;
-	}
-
-	section article#wspolnoty2 {
-		.wspolnota {
-			.desc {
-				width: 100%;
-				.lead {
-					line-height: 22px;
-				}
-			}
-			.right {
-				right: 0px;
-			}
-
-			.left {
-				left: 0px;
-			}
-
-			
-		}
-
-
 	}
 }
 
@@ -335,8 +237,13 @@ section article#wspolnoty2 {
 }
 
 @media screen and (max-width: 425px) {
-	section.welcome-screen .sentence {
-		display: none;
+	div.welcome-screen {
+		.mobile-only {
+			display: block;
+		}
+		.section-slider {
+			display: none;
+		}
 	}
 }
 

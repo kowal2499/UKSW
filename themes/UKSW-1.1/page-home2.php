@@ -59,6 +59,10 @@ get_header();
             <div class="col-md-12">
                 <div class="welcome-screen">
 
+                    <div class="mobile-only">
+                        <img class="img-responsive center-block" src="<?php echo get_template_directory_uri() . '/assets/imgs/da_circle_transparent.png'; ?>" alt="">
+                    </div>
+
                     <div class="section-slider">
                         <?php include_once 'classes/slider.php'; ?>
                         <div class="layer-logo">
@@ -136,41 +140,37 @@ get_header();
                 <section class="row-content">
                     <ul class="nav nav-pills nav-justified">
                         <?php
-                            foreach (activityCategories as $id => $activity) {
-                                echo '<li' . ($id === 0 ? ' class="active"' : ''). '><a data-toggle="tab" href="#' . $activity['href'] .'" style="color: '. $activity['color'] . '">'. $activity['name'] . '</a></li>';
-                            }
+                        foreach (activityCategories as $id => $activity) {
+                            echo '<li' . ($id === 0 ? ' class="active"' : ''). '><a data-toggle="tab" href="#' . $activity['href'] .'" style="color: '. $activity['color'] . '">'. $activity['name'] . '</a></li>';
+                        }
                         ?>
                     </ul>
 
-
                     <div class="tab-content">
 
-                        <?php foreach (activityCategories as $id => $category): ?>
-
-                            <div id="<?php echo $category['href']; ?>" class="tab-pane fade <?php echo ($id === 0 ? 'active in' : ''); ?>">
-                                <div class="tab-container">
+                    <?php foreach (activityCategories as $id => $category): ?>
+                        <div id="<?php echo $category['href']; ?>" class="tab-pane fade <?php echo ($id === 0 ? 'active in' : ''); ?>">
+                            <div class="wrapper">
+                                <div class="news-container">
                                     <?php foreach ($activities as $activity): ?>
                                         <?php if (in_array($category['slug'], $activity['category'])): ?>
                                             <?php $id = $activity['id']; ?>
-
-                                            <div class="tile">
-                                                <a href="<?php echo get_permalink($id); ?>">
-
-                                                    <?php echo get_the_post_thumbnail($id, 'post-thumbnail'); ?>
-                                                    <div class="title" style="background-color: <?php echo $category['color']; ?>">
+                                            <div class="news-item">
+                                                <a href="<?php echo get_permalink($id); ?>" style="background-image: url('<?php echo get_the_post_thumbnail_url($id, 'post-thumbnail'); ?>')">
+                                                    <h3 style="background-color: <?php echo $category['color']; ?>">
                                                         <?php echo get_the_title($id); ?>
-                                                    </div>
+                                                    </h3>
                                                 </a>
                                             </div>
-
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </div>
                             </div>
-
-                        <?php endforeach; ?>
+                        </div>
+                    <?php endforeach; ?>
 
                     </div>
+
                 </section>
 
             </div>
